@@ -1,0 +1,22 @@
+{
+  "name": "new-year-counter-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevoRia/new-year-counter-bot.git"
+  },
+  "author": "Vadym Riabchenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DevoRia/new-year-counter-bot/issues"
+  },
+  "homepage": "https://github.com/DevoRia/new-year-counter-bot#readme",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.50.0"
+  }
+}
