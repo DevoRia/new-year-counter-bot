@@ -6,10 +6,8 @@ class CronNotifier implements ICron {
 
   private job: any;
 
-  setCron() {
-    this.job = new CronJob('0 */12 * * *', () => {
-      console.log('You will see this message every second');
-    });
+  setCron(job: () => void) {
+    this.job = new CronJob('0 */12 * * *', job);
   }
 
   registry(): void {

@@ -1,3 +1,5 @@
+import {Message} from "../interfaces/message";
+
 const TelegramBot = require('node-telegram-bot-api');
 
 export class Bot {
@@ -12,7 +14,11 @@ export class Bot {
     return this.bot;
   }
 
-  onMessage(handler: (message: string) => void): void {
+  sendMessage(chatId: number, message: string) {
+    this.bot.sendMessage(chatId, message);
+  }
+
+  onMessage(handler: (message: Message) => void): void {
     this.bot.on('message', handler);
   }
 }
