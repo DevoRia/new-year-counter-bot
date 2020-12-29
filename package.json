@@ -4,6 +4,9 @@
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
+    "start": "tsc && node dist",
+    "build": "tsc",
+    "prod": "node dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +20,15 @@
   },
   "homepage": "https://github.com/DevoRia/new-year-counter-bot#readme",
   "dependencies": {
+    "cron": "^1.8.2",
+    "moment": "^2.29.1",
+    "mongoose": "^5.11.9",
     "node-telegram-bot-api": "^0.50.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.14",
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
+    "@typescript-eslint/parser": "^4.10.0",
+    "eslint": "^7.15.0"
   }
 }
