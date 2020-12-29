@@ -1,14 +1,35 @@
 import {Bot} from "./helper/bot";
 import {Type} from "./interfaces/message";
+import {MongoConnector} from "./services/mongoose";
 
 const token: string = process.env.TOKEN as string;
+const mongoUrl: string = process.env.DATABASE as string;
 
 class Application {
 
-  main(): void {
-    const bot = new Bot(token);
+  private bot: Bot;
+  private mongo: MongoConnector;
 
-    bot.onMessage(message => {
+  constructor() {
+    this.bot = new Bot(token);
+    this.mongo = new MongoConnector();
+  }
+
+  async start() {
+    await this.init();
+    setImmediate(() => this.main());
+  }
+
+  private async init(): Promise<void> {
+    try {
+      await this.mongo.init(mongoUrl);
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  private main(): void {
+    this.bot.onMessage(message => {
       const id = message.chat.id;
       let messageToSend;
 
@@ -21,10 +42,11 @@ class Application {
           break;
       }
 
-      bot.sendMessage(id, messageToSend);
+      this.bot.sendMessage(id, messageToSend);
     })
   }
-
 }
 
-new Application().main();
+const application = new Application();
+application.start();
+
