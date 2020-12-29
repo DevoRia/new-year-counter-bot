@@ -2,7 +2,7 @@ import {ICron} from "../interfaces/cron";
 
 const CronJob = require('cron').CronJob;
 
-class CronNotifier implements ICron {
+export class CronNotifier implements ICron {
 
   private job: any;
 

@@ -9,6 +9,7 @@ export interface Message {
   },
   chat: {
     id: number,
+    title: string,
     first_name: string,
     username: string,
     type: Type,
