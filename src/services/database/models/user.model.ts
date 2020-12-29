@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 export interface UserStructure {
   _id?: string;
   id?: number;
-  is_bot?: string;
+  is_bot?: boolean;
   first_name?: string;
   username?: string;
   language_code?: string;
@@ -15,6 +15,8 @@ const userSchema = new mongoose.Schema({
   first_name: { type: String },
   username: { type: String },
   language_code: { type: String },
+}, {
+  timestamps: true,
 });
 
 export const UserModel = mongoose.model('User', userSchema);

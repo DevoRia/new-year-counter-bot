@@ -5,13 +5,16 @@ import {MessageModel, MessageStructure} from "./models/message.model";
 export class Repository {
 
   async saveGroup(group: GroupStructure): Promise<void> {
-    const existedGroup = await GroupModel.findOne({ id: group.id });
-    if (!existedGroup) await new GroupModel(group).save();
+    let existedGroup = await GroupModel.findOne({ id: group.id });
+    if (!existedGroup) existedGroup = await new GroupModel(group).save();
+    return existedGroup;
+
   }
 
   async saveUser(user: UserStructure) {
-    const existedUser = await UserModel.findOne({ id: user.id });
-    if (!existedUser) await new UserModel(user).save();
+    let existedUser = await UserModel.findOne({ id: user.id });
+    if (!existedUser) existedUser = await new UserModel(user).save();
+    return existedUser;
   }
 
   async saveMessage(message: MessageStructure) {

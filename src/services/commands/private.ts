@@ -13,9 +13,14 @@ export class PrivateCommand implements Command {
     const id = Utils.getChatId(message);
     const firstName = Utils.getFirstName(message);
     this.bot.sendMessage(id, `${firstName}, я поки не вмію говорити. Але скоро зумію.`)
+    this.persistMessageInfo(message)
   }
 
-  persistMessageInfo(message: Message): void {
+  async persistMessageInfo(message: Message): Promise<void> {
+    const userStructure = Utils.mapUser(message);
+    const user = await this.repository.saveUser(userStructure);
+    const messageStructure = Utils.mapMessage(message, user);
+    await this.repository.saveMessage(messageStructure);
   }
 
 }

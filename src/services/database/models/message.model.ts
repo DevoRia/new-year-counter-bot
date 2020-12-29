@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 export interface MessageStructure {
   _id?: string;
-  date?: string;
+  date?: number | Date;
   message_id?: number;
   text?: string;
   user?: string;
@@ -22,6 +22,8 @@ const messageSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'Group'
   }
+}, {
+  timestamps: true,
 });
 
 export const MessageModel = mongoose.model('Message', messageSchema);

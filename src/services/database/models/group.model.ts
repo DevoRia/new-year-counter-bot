@@ -9,6 +9,8 @@ export interface GroupStructure {
 const groupSchema = new mongoose.Schema({
   title: { type: String },
   id: { type: Number },
+}, {
+  timestamps: true,
 });
 
 export const GroupModel = mongoose.model('Group', groupSchema);

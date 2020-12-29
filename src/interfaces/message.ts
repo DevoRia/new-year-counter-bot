@@ -15,7 +15,7 @@ export interface Message {
     type: Type,
     all_members_are_administrators: boolean
   },
-  date: Date,
+  date: number,
   text: string,
   entities: { offset: number, length: number, type: string }[],
   new_chat_members:
