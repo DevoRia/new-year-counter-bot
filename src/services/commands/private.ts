@@ -4,16 +4,13 @@ import {Message} from "../../interfaces/message";
 import {Utils} from "../../helper/message.utils";
 import {Repository} from "../database/repository";
 
-export class PrivateCommand implements Command {
-  constructor(private bot: Bot,
-              private repository: Repository) {
+export class PrivateCommand extends Command {
+  constructor(bot: Bot,
+              repository: Repository) {
+    super(bot, repository);
   }
-
   reply(message: Message): void {
-    const id = Utils.getChatId(message);
-    const firstName = Utils.getFirstName(message);
-    this.bot.sendMessage(id, `${firstName}, я поки не вмію говорити. Але скоро зумію.`)
-    this.persistMessageInfo(message)
+    this.sendCountToNewYear(message);
   }
 
   async persistMessageInfo(message: Message): Promise<void> {
@@ -22,5 +19,4 @@ export class PrivateCommand implements Command {
     const messageStructure = Utils.mapMessage(message, user);
     await this.repository.saveMessage(messageStructure);
   }
-
 }

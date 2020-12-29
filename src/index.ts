@@ -1,6 +1,6 @@
 import {Bot} from "./helper/bot";
 import {MongoConnector} from "./services/mongoose";
-import {commandFactory} from "./services/commands/command";
+import {commandFactory} from "./services/commands/commandFactory";
 import {ICron} from "./interfaces/cron";
 import {CronNotifier} from "./services/cron-notifier";
 import {ScheduleCommand} from "./services/commands/schedule";

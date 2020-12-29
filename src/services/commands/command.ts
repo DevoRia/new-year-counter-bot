@@ -1,17 +1,28 @@
 import {Bot} from "../../helper/bot";
-import {Message, Type} from "../../interfaces/message";
-import {PrivateCommand} from "./private";
-import {GroupCommand} from "./group";
+import {Message} from "../../interfaces/message";
 import {Repository} from "../database/repository";
+import {Utils} from "../../helper/message.utils";
+import {Counter} from "../counter";
 
-export interface Command {
-  reply(message: Message): void
-  persistMessageInfo(message: Message): void
-}
+export abstract class Command {
+  constructor(protected bot: Bot,
+              protected repository: Repository) {
+  }
 
-export const commandFactory = (type: Type, bot: Bot, repository: Repository): Command => {
-  switch (type) {
-    case Type.GROUP: return new GroupCommand(bot, repository);
-    default: return new PrivateCommand(bot, repository);
+  abstract reply(message: Message): void;
+  abstract persistMessageInfo(message: Message): void;
+
+
+  protected sendCountToNewYear(message: Message) {
+    const id = Utils.getChatId(message);
+    const firstName = Utils.getFirstName(message);
+    if (message.text === '/нг') {
+      const diffTime = Counter.getTimeToNewYear();
+      const days = diffTime.format('DD');
+      this.bot.sendMessage(id, `${firstName}, до нового року залишилось: ${diffTime.format('DD')} ${Counter.getDayWord(days)} ${diffTime.format('HH:mm:ss')} \n 🎅❄️🎄`)
+    } else {
+      this.bot.sendMessage(id, `${firstName}, я знаю тільки /нг...`)
+    }
+    this.persistMessageInfo(message)
   }
 }
