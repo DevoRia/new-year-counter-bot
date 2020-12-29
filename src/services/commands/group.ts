@@ -11,7 +11,10 @@ export class GroupCommand extends Command {
   }
 
   reply(message: Message): void {
-    this.sendCountToNewYear(message);
+    if (message.text === '/нг') {
+      this.sendCountToNewYear(message);
+    }
+    this.persistMessageInfo(message)
   }
 
   async persistMessageInfo(message: Message): Promise<void> {

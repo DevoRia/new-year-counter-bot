@@ -16,13 +16,8 @@ export abstract class Command {
   protected sendCountToNewYear(message: Message) {
     const id = Utils.getChatId(message);
     const firstName = Utils.getFirstName(message);
-    if (message.text === '/нг') {
-      const diffTime = Counter.getTimeToNewYear();
-      const days = diffTime.format('DD');
-      this.bot.sendMessage(id, `${firstName}, до нового року залишилось: ${diffTime.format('DD')} ${Counter.getDayWord(days)} ${diffTime.format('HH:mm:ss')} \n 🎅❄️🎄`)
-    } else {
-      this.bot.sendMessage(id, `${firstName}, я знаю тільки /нг...`)
-    }
-    this.persistMessageInfo(message)
+    const diffTime = Counter.getTimeToNewYear();
+    const days = diffTime.format('DD');
+    this.bot.sendMessage(id, `${firstName}, до нового року залишилось: ${diffTime.format('DD')} ${Counter.getDayWord(days)} ${diffTime.format('HH:mm:ss')} \n 🎅❄️🎄`)
   }
 }

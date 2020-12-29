@@ -10,7 +10,12 @@ export class PrivateCommand extends Command {
     super(bot, repository);
   }
   reply(message: Message): void {
-    this.sendCountToNewYear(message);
+    if (message.text === '/нг') {
+      this.sendCountToNewYear(message);
+    } else {
+      this.bot.sendMessage(Utils.getChatId(message), `${Utils.getFirstName(message)}, я знаю тільки /нг...`)
+    }
+    this.persistMessageInfo(message)
   }
 
   async persistMessageInfo(message: Message): Promise<void> {

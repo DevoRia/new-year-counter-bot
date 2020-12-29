@@ -51,3 +51,10 @@ class Application {
 const application = new Application();
 application.start();
 
+const  http = require('http');
+
+http.createServer( (req:any, res:any) => {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.write('It works!');
+  res.end();
+}).listen(process.env.PORT);
